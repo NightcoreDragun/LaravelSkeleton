@@ -17,7 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/{lang}/test', function ($lang) {
-    App::setlocale($lang);
-    return view('test');
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localize']
+], function () {
+
+    // Example of route
+    // Route::get(LaravelLocalization::transRoute('routes.weekly_classes_one'), [CourseController::class, 'test1'])->name('testOne');
+   
 });
+
